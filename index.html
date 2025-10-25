@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabDiagnóstico - Excelência em Análises Clínicas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e configurações gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a5f7a;
+            --secondary: #2a9d8f;
+            --accent: #e76f51;
+            --light: #f8f9fa;
+            --dark: #264653;
+            --gray: #6c757d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(26, 95, 122, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #144a60;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background-color: #d45a3d;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 95, 122, 0.8), rgba(26, 95, 122, 0.8)), url('https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Destaques */
+        .highlights {
+            background-color: white;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .highlight-card {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .highlight-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .highlight-card p {
+            color: var(--gray);
+        }
+
+        /* Sobre */
+        .about {
+            background-color: var(--light);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-size: 1.05rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Serviços */
+        .services {
+            background-color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Exames */
+        .exams {
+            background-color: var(--light);
+        }
+
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .exam-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .exam-image {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .exam-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .exam-card:hover .exam-image img {
+            transform: scale(1.1);
+        }
+
+        .exam-content {
+            padding: 25px;
+        }
+
+        .exam-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .exam-content p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* Unidades */
+        .units {
+            background-color: white;
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .unit-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .unit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .unit-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .unit-info h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .unit-details p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+
+        .unit-details i {
+            margin-right: 10px;
+            color: var(--secondary);
+            width: 20px;
+        }
+
+        /* Contato */
+        .contact {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .section-title.white h2 {
+            color: white;
+        }
+
+        .section-title.white h2::after {
+            background: white;
+        }
+
+        .section-title.white p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-content {
+            display: flex;
+            gap: 60px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .footer-column {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        .footer-column:last-child {
+            margin-right: 0;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+                margin-bottom: 40px;
+            }
+            
+            .footer-content {
+                flex-wrap: wrap;
+            }
+            
+            .footer-column {
+                flex: 0 0 48%;
+                margin-right: 0;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 0 0 30px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero {
+                margin-top: 70px;
+                height: 80vh;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .footer-column {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Lab<span>Diagnóstico</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#exams">Exames</a></li>
+                    <li><a href="#units">Unidades</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Excelência em Diagnóstico Laboratorial</h2>
+                <p>Resultados precisos e confiáveis para cuidar da sua saúde com a qualidade que você merece.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Agendar Exame</a>
+                    <a href="#services" class="btn btn-secondary">Nossos Serviços</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destaques -->
+    <section class="highlights">
+        <div class="container">
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Tecnologia de Ponta</h3>
+                    <p>Equipamentos modernos e metodologias validadas para resultados confiáveis.</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Resultados Rápidos</h3>
+                    <p>Agilidade na liberação de laudos com a qualidade que você precisa.</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Corpo Clínico</h3>
+                    <p>Profissionais especializados e constantemente capacitados.</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Qualidade Certificada</h3>
+                    <p>Certificações de qualidade que garantem a excelência dos nossos serviços.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nós</h2>
+                <p>Conheça nossa trajetória e compromisso com a saúde</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Há mais de 20 anos cuidando da sua saúde</h3>
+                    <p>Fundado em 2002, o LabDiagnóstico se consolidou como referência em análises clínicas, oferecendo serviços de diagnóstico com precisão, agilidade e confiança.</p>
+                    <p>Nossa missão é contribuir para a melhoria da qualidade de vida das pessoas através de resultados laboratoriais confiáveis e um atendimento humanizado.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-microscope"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Precisão Analítica</h4>
+                                <p>Controles de qualidade rigorosos em todas as etapas</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Atendimento Humanizado</h4>
+                                <p>Profissionais qualificados e acolhedores</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Segurança</h4>
+                                <p>Protocolos de biossegurança rigorosos</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Coleta Domiciliar</h4>
+                                <p>Conforto e praticidade no seu lar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="btn btn-primary">Entre em Contato</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Laboratório de análises clínicas">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+                <p>Conheça nossa gama completa de exames laboratoriais</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h3>Bioquímica</h3>
+                    <p>Perfil lipídico, glicemia, função renal e hepática, entre outros.</p>
+                    <a href="#contact" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Hematologia</h3>
+                    <p>Hemograma completo, coagulograma e outros exames do sangue.</p>
+                    <a href="#contact" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3>Molecular</h3>
+                    <p>PCR, testes genéticos e exames de biologia molecular.</p>
+                    <a href="#contact" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-allergies"></i>
+                    </div>
+                    <h3>Imunologia</h3>
+                    <p>Sorologias, marcadores tumorais e testes imunológicos.</p>
+                    <a href="#contact" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-urine"></i>
+                    </div>
+                    <h3>Urinálise</h3>
+                    <p>EAS, urocultura e exames completos de urina.</p>
+                    <a href="#contact" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bacteria"></i>
+                    </div>
+                    <h3>Microbiologia</h3>
+                    <p>Culturas, antibiogramas e exames microbiológicos.</p>
+                    <a href="#contact" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exames -->
+    <section class="exams" id="exams">
+        <div class="container">
+            <div class="section-title">
+                <h2>Exames em Destaque</h2>
+                <p>Conheça alguns de nossos exames mais solicitados</p>
+            </div>
+            <div class="exams-grid">
+                <div class="exam-card">
+                    <div class="exam-image">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hemograma completo">
+                    </div>
+                    <div class="exam-content">
+                        <h3>Hemograma Completo</h3>
+                        <p>Avaliação global das células sanguíneas para diagnóstico de anemias, infecções e outras condições.</p>
+                        <a href="#contact" class="btn btn-accent">Agendar</a>
+                    </div>
+                </div>
+                <div class="exam-card">
+                    <div class="exam-image">
+                        <img src="https://images.unsplash.com/photo-1584634731339-252c581abfc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Perfil lipídico">
+                    </div>
+                    <div class="exam-content">
+                        <h3>Perfil Lipídico</h3>
+                        <p>Avaliação do colesterol total, HDL, LDL e triglicerídeos para risco cardiovascular.</p>
+                        <a href="#contact" class="btn btn-accent">Agendar</a>
+                    </div>
+                </div>
+                <div class="exam-card">
+                    <div class="exam-image">
+                        <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Glicemia">
+                    </div>
+                    <div class="exam-content">
+                        <h3>Glicemia</h3>
+                        <p>Dosagem de glicose no sangue para diagnóstico e monitoramento do diabetes.</p>
+                        <a href="#contact" class="btn btn-accent">Agendar</a>
+                    </div>
+                </div>
+                <div class="exam-card">
+                    <div class="exam-image">
+                        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="TSH e T4 livre">
+                    </div>
+                    <div class="exam-content">
+                        <h3>TSH e T4 Livre</h3>
+                        <p>Avaliação da função tireoidiana para diagnóstico de hipo e hipertireoidismo.</p>
+                        <a href="#contact" class="btn btn-accent">Agendar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unidades -->
+    <section class="units" id="units">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossas Unidades</h2>
+                <p>Encontre a unidade mais próxima de você</p>
+            </div>
+            <div class="units-grid">
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <div class="unit-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="unit-info">
+                            <h3>Unidade Centro</h3>
+                            <p>São Paulo - SP</p>
+                        </div>
+                    </div>
+                    <div class="unit-details">
+                        <p><i class="fas fa-clock"></i> Seg-Sex: 6h-18h | Sáb: 6h-12h</p>
+                        <p><i class="fas fa-phone"></i> (11) 3333-4444</p>
+                        <p><i class="fas fa-map"></i> Rua das Flores, 123 - Centro</p>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <div class="unit-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="unit-info">
+                            <h3>Unidade Zona Sul</h3>
+                            <p>São Paulo - SP</p>
+                        </div>
+                    </div>
+                    <div class="unit-details">
+                        <p><i class="fas fa-clock"></i> Seg-Sex: 6h-20h | Sáb: 7h-13h</p>
+                        <p><i class="fas fa-phone"></i> (11) 5555-6666</p>
+                        <p><i class="fas fa-map"></i> Av. Paulista, 1000 - Jardins</p>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <div class="unit-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="unit-info">
+                            <h3>Unidade Zona Leste</h3>
+                            <p>São Paulo - SP</p>
+                        </div>
+                    </div>
+                    <div class="unit-details">
+                        <p><i class="fas fa-clock"></i> Seg-Sex: 6h-18h | Sáb: 7h-12h</p>
+                        <p><i class="fas fa-phone"></i> (11) 7777-8888</p>
+                        <p><i class="fas fa-map"></i> Rua das Palmeiras, 456 - Tatuapé</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title white">
+                <h2>Entre em Contato</h2>
+                <p>Agende seu exame e tire todas as suas dúvidas</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Precisa de Ajuda?</h3>
+                    <p>Estamos aqui para esclarecer suas dúvidas sobre exames, preparo ou agendamento. Entre em contato conosco!</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Telefone</h4>
+                                <p>(11) 3333-4444</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>E-mail</h4>
+                                <p>contato@labdiagnostico.com.br</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Horário de Atendimento</h4>
+                                <p>Segunda a Sexta: 6h às 20h</p>
+                                <p>Sábado: 6h às 13h</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="exam">Exame de Interesse</label>
+                            <select id="exam" class="form-control" required>
+                                <option value="">Selecione um exame</option>
+                                <option value="hemograma">Hemograma Completo</option>
+                                <option value="glicemia">Glicemia</option>
+                                <option value="lipidico">Perfil Lipídico</option>
+                                <option value="tsh">TSH e T4 Livre</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" class="form-control" placeholder="Descreva sua dúvida ou solicitação..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LabDiagnóstico</h3>
+                    <p>Há mais de 20 anos oferecendo serviços de análises clínicas com precisão, confiança e qualidade para cuidar da sua saúde.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#exams">Exames</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Exames</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Hemograma</a></li>
+                        <li><a href="#">Glicemia</a></li>
+                        <li><a href="#">Colesterol</a></li>
+                        <li><a href="#">Função Tireoidiana</a></li>
+                        <li><a href="#">Exames de Urina</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> (11) 3333-4444</li>
+                        <li><i class="fas fa-envelope"></i> contato@labdiagnostico.com.br</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Rua das Flores, 123 - Centro, SP</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 LabDiagnóstico. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Form submission
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Obrigado pelo seu contato! Em breve nossa equipe entrará em contato para agendar seu exame.');
+            form.reset();
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'white';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
